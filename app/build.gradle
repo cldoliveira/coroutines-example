@@ -52,6 +52,12 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:$koin"
     implementation "org.koin:koin-androidx-viewmodel:$koin"
 
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+
+    implementation "de.hdodenhof:circleimageview:$circleImageView"
+
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
