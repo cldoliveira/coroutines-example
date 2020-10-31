@@ -8,7 +8,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -30,6 +29,7 @@ ext {
     okhttpVersion = '4.9.0'
     retrofitVersion = '2.9.0'
     circleImageView = '3.0.0'
+    picassoVersion = '2.5.2'
 
     koin = '2.0.1'
 
@@ -43,7 +43,6 @@ ext {
     espressoCore = '3.3.0'
     mockitoVersion = '3.3.3'
     archVersion = '1.1.1'
-
 }
 
 task clean(type: Delete) {

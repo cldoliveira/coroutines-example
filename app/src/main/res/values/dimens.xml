@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="match_constraint">0dp</dimen>
+    <dimen name="text_information_size">16sp</dimen>
+    <dimen name="user_image_size">52dp</dimen>
 </resources>
