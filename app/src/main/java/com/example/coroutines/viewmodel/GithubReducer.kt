@@ -4,7 +4,7 @@ import com.example.coroutines.model.GithubEvent
 import com.example.coroutines.model.GithubEvent.*
 import com.example.coroutines.model.GithubState
 
-class GithubConverter {
+class GithubReducer {
 
     fun convert(currentState: GithubState?, event: GithubEvent): GithubState = currentState?.let { state ->
         when (event) {

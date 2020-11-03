@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class GithubViewModel(private val repository: GithubRepository,
-                      private val converter: GithubConverter): ViewModel(), LifecycleObserver {
+                      private val reducer: GithubReducer): ViewModel(), LifecycleObserver {
 
     val state = MutableLiveData<GithubState>().apply { value = GithubState() }
 
@@ -27,7 +27,7 @@ class GithubViewModel(private val repository: GithubRepository,
     }
 
     private fun updateStateWhenEvent(event: GithubEvent) {
-        converter.convert(state.value, event).run {
+        reducer.convert(state.value, event).run {
             state.value = this
         }
     }

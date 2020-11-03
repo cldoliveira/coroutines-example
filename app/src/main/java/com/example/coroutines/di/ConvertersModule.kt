@@ -1,10 +1,10 @@
 package com.example.coroutines.di
 
-import com.example.coroutines.viewmodel.GithubConverter
+import com.example.coroutines.viewmodel.GithubReducer
 import org.koin.dsl.module
 
-val convertersModule = module {
-    factory { provideGithubConverter() }
+val reducerModule = module {
+    factory { provideGithubReducer() }
 }
 
-private fun provideGithubConverter() = GithubConverter()
+private fun provideGithubReducer() = GithubReducer()
