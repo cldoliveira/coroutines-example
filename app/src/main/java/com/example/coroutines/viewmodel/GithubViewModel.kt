@@ -26,7 +26,7 @@ class GithubViewModel(private val repository: GithubRepository,
         }
     }
 
-    private fun updateStateWhenEvent(event: GithubEvent) {
+    private suspend fun updateStateWhenEvent(event: GithubEvent) {
         reducer.convert(state.value, event).run {
             state.value = this
         }
