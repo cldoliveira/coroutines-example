@@ -5,7 +5,9 @@ import com.example.coroutines.model.GithubEvent
 import com.example.coroutines.model.GithubEvent.*
 import com.example.coroutines.model.GithubState
 import com.example.coroutines.repository.GithubRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class GithubViewModel(private val repository: GithubRepository,
@@ -13,22 +15,19 @@ class GithubViewModel(private val repository: GithubRepository,
 
     val state = MutableLiveData<GithubState>().apply { value = GithubState() }
 
+    private val currentState: GithubState?
+        get() = state.value
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun fetchUsers() {
         viewModelScope.launch {
             try {
-                updateStateWhenEvent(Loading)
+                state.postValue(reducer(currentState, Loading))
                 val listOfUsers = repository.getUsers()
-                updateStateWhenEvent(ListReceived(listOfUsers))
+                state.postValue(reducer(currentState, ListReceived(listOfUsers)))
             } catch (ex: Exception) {
-                updateStateWhenEvent(ErrorReceived(ex.localizedMessage))
+                state.postValue(reducer(currentState, ErrorReceived(ex.localizedMessage)))
             }
-        }
-    }
-
-    private suspend fun updateStateWhenEvent(event: GithubEvent) {
-        reducer.convert(state.value, event).run {
-            state.value = this
         }
     }
 }
