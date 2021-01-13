@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private fun initializeObserver() {
         viewModel.state.observe(this, { state ->
             when(state.lastEvent) {
-                is Loading -> progressBar.visibility = View.VISIBLE
+                is ShowLoading -> progressBar.visibility = View.VISIBLE
                 is ListReceived -> updateList(state.listOfUser)
                 is ErrorReceived -> showErrorMsg(state.errorMsg)
             }
