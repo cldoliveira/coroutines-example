@@ -9,17 +9,19 @@ import com.example.coroutines.repository.GithubRepository
 import com.example.coroutines.repository.Result
 import kotlinx.coroutines.launch
 
-class GithubViewModel(private val repository: GithubRepository,
+class GithubViewModel(private val getUsersUseCase: GetUsersUseCase,
                       reducer: GithubReducer): BaseViewModel<GithubState, GithubEvent>(reducer), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun fetchUsers() {
         viewModelScope.launch {
             updateState(ShowLoading)
-            when (val result = repository.getUsers()) {
-                is Result.Success<List<User>> -> updateState(ListReceived(result.data))
-                is Result.Error ->  updateState(ErrorReceived(result.exception.localizedMessage))
-            }
+
+            /* try to fetch data from server */
+            val fetchUsersState = getUsersUseCase()
+
+            /* update the state when the search has finished */
+            updateState(fetchUsersState)
         }
     }
 

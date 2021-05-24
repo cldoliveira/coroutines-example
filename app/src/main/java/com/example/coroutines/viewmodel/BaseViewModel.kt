@@ -8,8 +8,8 @@ import kotlinx.coroutines.withContext
 abstract class BaseViewModel<State, Event>(private val reducer: Reducer<State, Event>): ViewModel() {
     val state = MutableLiveData<State>().apply { value = setInitialState() }
 
-    private val currentState: State?
-        get() = state.value
+    private val currentState: State
+        get() = state.value ?: setInitialState()
 
     abstract fun setInitialState(): State
 
