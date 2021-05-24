@@ -39,4 +39,4 @@ private fun provideRetrofit(baseURL: String, client: OkHttpClient, gson: Gson) =
     build()
 }
 
-fun provideGithubApi(retrofit: Retrofit): GithubApi = retrofit.create(GithubApi::class.java)
+private fun provideGithubApi(retrofit: Retrofit): GithubApi = retrofit.create(GithubApi::class.java)
