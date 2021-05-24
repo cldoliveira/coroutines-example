@@ -4,9 +4,6 @@ import androidx.lifecycle.*
 import com.example.coroutines.model.GithubEvent
 import com.example.coroutines.model.GithubEvent.*
 import com.example.coroutines.model.GithubState
-import com.example.coroutines.network.User
-import com.example.coroutines.repository.GithubRepository
-import com.example.coroutines.repository.Result
 import kotlinx.coroutines.launch
 
 class GithubViewModel(private val getUsersUseCase: GetUsersUseCase,
@@ -18,10 +15,10 @@ class GithubViewModel(private val getUsersUseCase: GetUsersUseCase,
             updateState(ShowLoading)
 
             /* try to fetch data from server */
-            val fetchUsersState = getUsersUseCase()
+            val githubUsers = getUsersUseCase()
 
             /* update the state when the search has finished */
-            updateState(fetchUsersState)
+            updateState(githubUsers)
         }
     }
 
