@@ -2,7 +2,7 @@ package com.example.coroutines.repository
 
 import com.example.coroutines.network.GithubApi
 
-class GithubRepository(private val api: GithubApi): BaseRepository() {
+class GithubRepository(private val api: GithubApi) {
 
-    suspend fun getUsers() = getResult { api.getUsers() }
+    suspend fun getUsers() = api.getUsers()
 }

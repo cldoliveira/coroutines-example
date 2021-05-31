@@ -9,9 +9,10 @@ import com.example.coroutines.repository.Result
 class GetUsersUseCase(private val repository: GithubRepository) {
 
     suspend operator fun invoke(): GithubEvent {
-        return when (val response = repository.getUsers()) {
-            is Result.Success<List<User>> -> ListReceived(response.data)
-            is Result.Error -> ErrorReceived(response.exception.localizedMessage)
+        return try {
+            ListReceived(repository.getUsers())
+        } catch (exception: Exception) {
+            ErrorReceived(exception.localizedMessage)
         }
     }
 }
