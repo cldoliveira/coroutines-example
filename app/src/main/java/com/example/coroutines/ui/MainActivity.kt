@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coroutines.R
 import com.example.coroutines.model.GithubEvent.*
+import com.example.coroutines.model.GithubState
 import com.example.coroutines.network.User
 import com.example.coroutines.viewmodel.GithubViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,9 +31,9 @@ class MainActivity : AppCompatActivity() {
     private fun initializeObserver() {
         viewModel.state.observe(this, { state ->
             when(state.lastEvent) {
-                is ShowLoading -> progressBar.visibility = View.VISIBLE
-                is ListReceived -> updateList(state.listOfUser)
-                is ErrorReceived -> showErrorMsg(state.errorMsg)
+                is ShowLoading -> progressBar.visibility = state.progressVisibility
+                is ListReceived -> updateList(state)
+                is ErrorReceived -> showErrorMsg(state)
             }
         })
     }
@@ -43,12 +44,13 @@ class MainActivity : AppCompatActivity() {
         rvUsers.adapter = adapter
     }
 
-    private fun updateList(listOfUsers: List<User>) {
-        progressBar.visibility = View.GONE
-        adapter.updateUsers(listOfUsers)
+    private fun updateList(state: GithubState) {
+        progressBar.visibility = state.progressVisibility
+        adapter.updateUsers(state.listOfUser)
     }
 
-    private fun showErrorMsg(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    private fun showErrorMsg(state: GithubState) {
+        progressBar.visibility = state.progressVisibility
+        Toast.makeText(this, state.errorMsg, Toast.LENGTH_LONG).show()
     }
 }

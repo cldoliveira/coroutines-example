@@ -1,5 +1,6 @@
 package com.example.coroutines.model
 
+import android.view.View
 import com.example.coroutines.network.User
 
 open class State
@@ -13,5 +14,6 @@ sealed class GithubEvent {
 data class GithubState(
     val listOfUser: List<User> = emptyList(),
     val errorMsg: String? = "",
+    val progressVisibility: Int = View.GONE,
     val lastEvent: GithubEvent? = null
 ): State()
